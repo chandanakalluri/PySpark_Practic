@@ -1,0 +1,17 @@
+from pyspark.sql import SparkSession
+spark=SparkSession.builder.appName("creating rdd").getOrCreate()
+data=[(1,"chandu"),(2,"gani"),(3,"lavi"),(4,"josu"),(5,"gani")]
+rdd=spark.sparkContext.parallelize(data)
+print(rdd.collect())
+print(rdd.count())
+print(rdd.getNumPartitions())
+print(rdd.first())
+m=rdd.map(lambda x:(x[0],x[1].upper()))
+print(m.collect())
+print(rdd.distinct())
+m1=rdd.filter(lambda x:x[1].startswith("g"))
+print(m1.collect())
+take=rdd.take(2)
+print(take)
+diati=rdd.map(lambda x:x[1]).distinct()
+print(diati.collect())
